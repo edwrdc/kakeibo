@@ -1,14 +1,12 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
-<<<<<<< HEAD
-=======
-  relationMode = "prisma"
->>>>>>> 576cbf4 (added =planetscale db)
+  provider  = "postgresql"
+  url  	    = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
