@@ -5,6 +5,10 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+<<<<<<< HEAD
+=======
+  relationMode = "prisma"
+>>>>>>> 576cbf4 (added =planetscale db)
 }
 
 model User {
