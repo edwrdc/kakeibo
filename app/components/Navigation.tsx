@@ -53,15 +53,7 @@ const Navigation = () => {
           </Button>
 
           <Link href={"/"}>
-            {/* <Image
-              src={Logo}
-              alt="Cash Stash"
-              width={200}
-              className="mx-auto lg:mx-0"
-              style={{
-                filter: "grayscale(1) invert(1)",
-              }}
-            /> */}
+
           </Link>
           <div className="flex justify-center items-center gap-4 ml-auto lg:ml-0">
             <div className="lg:flex items-center hidden gap-1">
