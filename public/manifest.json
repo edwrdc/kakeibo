@@ -1,0 +1,18 @@
+{
+  "theme_color": "#9DBC98",
+  "background_color": "#EBD9B4",
+  "display": "fullscreen",
+  "scope": "/",
+  "start_url": "/",
+  "name": "Kakeibo - A Personal Finance Management",
+  "short_name": "Kakeibo",
+  "description": "Kakeibo is selfhosted minimalist personal finance app. Track your spending, set a budget, and save more.",
+  "shorcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "View your overall financial health",
+      "url": "/dashboard"
+    }
+  ]
+}
