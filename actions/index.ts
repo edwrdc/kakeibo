@@ -32,6 +32,9 @@ import CreateTransactionSchema, {
 import CreateReminderSchema, {
   CreateReminderSchemaType,
 } from "@/schemas/CreateReminderSchema";
+import CreateDebtSchema, {
+  CreateDebtSchemaType,
+} from "@/schemas/CreateDebtSchema";
 import { redirect } from "next/navigation";
 
 export const loginAction = async ({ email, password }: LoginSchemaType) => {
@@ -304,6 +307,57 @@ export const updateAccountByIdAction = async ({
     account: updatedAccount,
   };
 };
+
+
+export const createDebtAction = async ({
+  name,
+  debtAmount,
+  currentAmount,
+  dueDate,
+}: CreateDebtSchemaType) => {
+  let result = CreateDebtSchema.safeParse({
+    name,
+    debtAmount,
+    currentAmount,
+    dueDate,
+  });
+
+  if (!result.success) {
+    return { error: "Unprocessable entity." };
+  }
+
+  const {
+    name: nameResult,
+    debtAmount: debtAmountResult,
+    currentAmount: currentAmountResult,
+    dueDate: dueDateResult,
+  } = result.data;
+
+  const currentUser = await getCurrentUser(cookies().get("token")?.value!);
+
+  if (!currentUser) {
+    return { error: "You are not authorized to perform this action." };
+  }
+
+  const createdDebt = await db.debt.create({
+    data: {
+      name: nameResult,
+      debtAmount: debtAmountResult,
+      currentAmount: currentAmountResult,
+      dueDate: dueDateResult,
+      userId: currentUser.id,
+    },
+  });
+
+  if (!createdDebt) {
+    return { error: "Error creating debt." };
+  }
+
+  return {
+    debt: createdDebt,
+  };
+};
+
 
 export const createBudgetAction = async ({
   budgetAmount,

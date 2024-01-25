@@ -1,11 +1,11 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
-  provider  = "mysql"
-  url  	    = env("DATABASE_URL")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -21,6 +21,7 @@ model User {
   reminders      Reminder[]
   transactions   Transaction[]
   userAccounts   UserAccount[]
+  Debt           Debt[]
 
   @@map("users")
 }
@@ -101,6 +102,21 @@ model Reminder {
 
   @@index([userId], map: "reminders_userId_fkey")
   @@map("reminders")
+}
+
+model Debt {
+  id            String   @id @default(cuid())
+  name          String
+  debtAmount    Float
+  currentAmount Float
+  dueDate       DateTime
+  userId        String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "debts_userId_fkey")
+  @@map("debts")
 }
 
 enum NotificationCategory {

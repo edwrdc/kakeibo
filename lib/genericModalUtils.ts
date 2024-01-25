@@ -42,6 +42,17 @@ export const openGenericModal = (
       })
     );
   }
+  if (page === "Debts") {
+    dispatch(
+      openGenericModalAction({
+        mode: "create",
+        dialogTitle: "Create a debt",
+        dialogDescription: "Fill out the form below to create a debt.",
+        entityId: "",
+        key: "debt",
+      })
+    );
+  }
 
   if (page === "Transactions") {
     dispatch(

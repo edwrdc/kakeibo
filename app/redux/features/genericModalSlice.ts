@@ -6,7 +6,7 @@ interface GenericModalState {
   dialogTitle?: string;
   dialogDescription?: string;
   mode: "edit" | "create";
-  key: "budget" | "goal" | "transaction" | "reminder" | "account" | "";
+  key: "budget" | "goal" | "transaction" | "reminder" | "account" | "debt" | "";
   props: any;
 }
 
@@ -31,7 +31,7 @@ export const genericModalSlice = createSlice({
         entityId: string;
         dialogTitle: string;
         dialogDescription: string;
-        key: "budget" | "goal" | "transaction" | "reminder" | "account" | "";
+        key: "budget" | "goal" | "transaction" | "reminder" | "account" | "debt" | "";
         props?: any;
       }>
     ) => {

@@ -62,6 +62,7 @@ export type TableName =
   | "transaction"
   | "budget"
   | "goal"
+  | "debt"
   | "reminder";
 
 export type Page =
@@ -69,6 +70,7 @@ export type Page =
   | "Accounts"
   | "Budgets"
   | "Goals"
+  | "Debts"
   | "Transactions"
   | "Reports"
   | "Settings";
@@ -99,6 +101,11 @@ export const PAGES: IPage[] = [
     label: "Goals",
     icon: FaPiggyBank,
     link: "/goals",
+  },
+  {
+    label: "Debts",
+    icon: FaPiggyBank,
+    link: "/debts",
   },
   {
     label: "Transactions",
