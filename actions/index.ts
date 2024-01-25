@@ -35,6 +35,8 @@ import CreateReminderSchema, {
 import CreateDebtSchema, {
   CreateDebtSchemaType,
 } from "@/schemas/CreateDebtSchema";
+import CreateInvestmentSchema, {CreateInvestmentSchemaType} from "@/schemas/CreateInvestmentSchema";
+import EditInvestmentSchema , {EditInvestmentSchemaType} from "@/schemas/EditInvestmentSchema";
 import { redirect } from "next/navigation";
 
 export const loginAction = async ({ email, password }: LoginSchemaType) => {
@@ -357,6 +359,151 @@ export const createDebtAction = async ({
     debt: createdDebt,
   };
 };
+
+export const createInvestmentAction = async ({
+  name,
+  investmentType,
+  amount,
+  startDate,
+  maturityDate,
+  rateOfReturn,
+}: CreateInvestmentSchemaType) => {
+  let result = CreateInvestmentSchema.safeParse({
+    name,
+    investmentType,
+    amount,
+    startDate,
+    maturityDate,
+    rateOfReturn,
+  });
+
+  if (!result.success) {
+    return { error: "Unprocessable entity." };
+  }
+
+  const {
+    name: nameResult,
+    investmentType: investmentTypeResult,
+    amount: amountResult,
+    startDate: startDateResult,
+    maturityDate: maturityDateResult,
+    rateOfReturn: rateOfReturnResult,
+  } = result.data;
+
+  const currentUser = await getCurrentUser(cookies().get("token")?.value!);
+
+  if (!currentUser) {
+    return { error: "You are not authorized to perform this action." };
+  }
+
+  const createdInvestment = await db.investment.create({
+    data: {
+      name: nameResult,
+      investmentType: investmentTypeResult,
+      amount: amountResult,
+      startDate: startDateResult,
+      maturityDate: maturityDateResult,
+      rateOfReturn: rateOfReturnResult,
+      userId: currentUser.id,
+    },
+  });
+
+  if (!createdInvestment) {
+    return { error: "Error creating investment." };
+  }
+
+  return {
+    investment: createdInvestment,
+  };
+};
+
+
+export const fetchInvestmentByIdAction = async (investmentId: string) => {
+  if (!investmentId) return { error: "Investment ID not found." };
+
+  const investment = await db.investment.findUnique({
+    where: { id: investmentId },
+  });
+
+  if (!investment)
+    return { error: `Investment not found with the given id ${investmentId}` };
+
+  return { investment };
+};
+
+
+export const updateInvestmentByIdAction = async ({
+  investmentId,
+  name,
+  investmentType,
+  amount,
+  startDate,
+  maturityDate,
+  rateOfReturn,
+}: EditInvestmentSchemaType & { investmentId: string }) => {
+  if (!investmentId) return { error: "Investment ID not found." };
+
+  const investmentToBeUpdated = await db.investment.findUnique({
+    where: { id: investmentId },
+  });
+
+  if (!investmentToBeUpdated)
+    return { error: `Investment not found with the given id ${investmentId}` };
+
+  const result = EditInvestmentSchema.safeParse({
+    name,
+    investmentType,
+    amount,
+    startDate,
+    maturityDate,
+    rateOfReturn,
+  });
+
+  if (!result.success) return { error: "Unprocessable entity." };
+
+  const { data } = result;
+
+  const updatedInvestment = await db.investment.update({
+    where: { id: investmentId },
+    data: {
+      name: data.name,
+      investmentType: data.investmentType,
+      amount: data.amount,
+      startDate: data.startDate,
+      maturityDate: data.maturityDate,
+      rateOfReturn: data.rateOfReturn,
+    },
+  });
+
+  if (!updatedInvestment) return { error: "Error updating investment." };
+
+  return { investment: updatedInvestment };
+};
+
+export const deleteInvestmentByIdAction = async (investmentId: string) => {
+  try {
+    if (!investmentId) {
+      throw new Error("Investment ID not found.");
+    }
+
+    const deletedInvestment = await db.investment.delete({
+      where: {
+        id: investmentId,
+      },
+    });
+
+    if (!deletedInvestment) {
+      throw new Error("Error deleting investment.");
+    }
+
+    return {
+      investment: deletedInvestment,
+    };
+  } catch (error) {
+    return { error: error instanceof Error ? error.message : error };
+  }
+};
+
 
 
 export const createBudgetAction = async ({

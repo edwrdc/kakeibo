@@ -8,6 +8,8 @@ import currentGoalReducer from "./features/currentGoalSlice";
 import goalReducer from "./features/goalSlice";
 import currentDebtReducer from "./features/currentDebtSlide";
 import debtReducer from "./features/debtSlice";
+import investmentReducer from "./features/investmentSlice";
+import currentInvestmentReducer from "./features/currentInvestmentSlice";
 import transactionsReducer from "./features/transactionsSlice";
 import remindersReducer from "./features/remindersSlice";
 import genericConfirmReducer from "./features/genericConfirmSlice";
@@ -25,6 +27,8 @@ export const store = configureStore({
     currentGoalReducer,
     currentDebtReducer,
     debtReducer,
+    currentInvestmentReducer,
+    investmentReducer,
     transactionsReducer,
     remindersReducer,
     genericConfirmReducer,

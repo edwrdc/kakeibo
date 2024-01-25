@@ -9,11 +9,13 @@ import CreateReminderForm from "@/app/components/Reminders/forms/CreateReminderF
 import EditReminderForm from "@/app/components/Reminders/forms/EditReminderForm";
 import CreateUserDebtForm from "./app/components/DebtsPage/forms/CreateDebtForm";
 import EditUserDebtForm from "./app/components/DebtsPage/forms/EditUserDebtForm";
+import CreateUserInvestmentForm from "./app/components/InvestmentsPage/forms/CreateInvestmentForm";
+import EditUserInvestmentForm from "./app/components/InvestmentsPage/forms/EditUserInvestmentForm";
 import { createElement } from "react";
 
 interface IGetGenericDialogContentParams {
   mode: "create" | "edit";
-  key: "budget" | "goal" | "transaction" | "reminder" | "account" | "debt" | "";
+  key: "budget" | "goal" | "transaction" | "reminder" | "account" | "debt" | "investment" | "";
   entityId: string;
   props?: any;
 }
@@ -41,6 +43,10 @@ const ContentMap: ContentMap = {
   debt: {
     create: CreateUserDebtForm,
     edit: EditUserDebtForm,
+  },
+  investment: {
+    create: CreateUserInvestmentForm,
+    edit: EditUserInvestmentForm,
   },
   transaction: {
     create: CreateTransactionForm,

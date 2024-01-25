@@ -9,6 +9,8 @@ import { SerializedUserAccount } from "./redux/features/userAccountSlice";
 import { SerializedBudget } from "./redux/features/budgetSlice";
 import { SerializedGoal } from "./redux/features/goalSlice";
 import { SerializedReminder } from "./redux/features/remindersSlice";
+import { SerializedDebt } from "./redux/features/debtSlice";
+import { SerializedInvestment } from "./redux/features/investmentSlice";
 
 export default async function Home() {
   let [
@@ -19,6 +21,8 @@ export default async function Home() {
     budgetsResult,
     goalsResult,
     remindersResult,
+    debtsResult, // Added debtsResult
+    investmentResult, // Added investmentResult
   ] = await Promise.all([
     searchTransactions({
       transactionType: "all",
@@ -42,6 +46,14 @@ export default async function Home() {
     getGenericListByCurrentUser<SerializedReminder>({
       tableName: "reminder",
       whereCondition: { isRead: false },
+    }),
+    getGenericListByCurrentUser<SerializedDebt>({ // Added fetch for debts
+      tableName: "debt",
+      serialize: true,
+    }),
+    getGenericListByCurrentUser<SerializedInvestment>({ // Added fetch for investments
+      tableName: "investment",
+      serialize: true,
     }),
   ]);
 
@@ -67,6 +79,8 @@ export default async function Home() {
         transactions={result?.transactions || []}
         goals={goalsResult?.data || []}
         reminders={remindersResult?.data || []}
+        debts={debtsResult?.data || []} // Corrected debtsResult usage
+        investments={investmentResult?.data || []} // Corrected investmentResult usage
       />
     </main>
   );

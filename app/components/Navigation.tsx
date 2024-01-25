@@ -19,6 +19,8 @@ const NAV_LINKS = [
   { name: "Accounts", href: "/accounts" },
   { name: "Budgets", href: "/budgets" },
   { name: "Goals", href: "/goals" },
+  { name: "Debts", href: "/debts" },
+  { name: "Investments", href: "/investments" },
   { name: "Transactions", href: "/transactions" },
   { name: "Reports", href: "/reports" },
 ];

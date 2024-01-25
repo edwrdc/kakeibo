@@ -4,3 +4,7 @@ export { default as EditReminderSchema } from "./EditReminderSchema";
 export { default as CreateUserAccountSchema } from "./CreateUserAccountSchema";
 export { default as EditBudgetSchema } from "./EditBudgetSchema";
 export { default as CreateBudgetSchema } from "./CreateBudgetSchema";
+export { default as CreateInvestmentSchema} from "./CreateInvestmentSchema";
+export { default as EditInvestmentSchema} from "./EditInvestmentSchema";
+export { default as CreateGoalSchema } from "./CreateGoalSchema";
+export { default as EditGoalSchema } from "./EditGoalSchema";

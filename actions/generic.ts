@@ -21,6 +21,7 @@ const TABLE_MAP: TableMap = {
   goal: prisma.goal,
   reminder: prisma.reminder,
   debt: prisma.debt,
+  investment: prisma.investment,
 };
 
 export const getTable = async (tableName: TableName) => {
@@ -35,6 +36,7 @@ export const getTable = async (tableName: TableName) => {
     Prisma.UserAccountDelegate<DefaultArgs> &
     Prisma.ReminderDelegate<DefaultArgs> & 
     Prisma.DebtDelegate<DefaultArgs> &
+    Prisma.InvestmentDelegate<DefaultArgs> &
     Prisma.TransactionDelegate<DefaultArgs>;
 };
 

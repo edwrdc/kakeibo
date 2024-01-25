@@ -54,16 +54,29 @@ export const openGenericModal = (
     );
   }
 
+  if (page === "Investments") {
+    dispatch(
+      openGenericModalAction({
+        mode: "create",
+        dialogTitle: "Create an investment",
+        dialogDescription: "Fill out the form below to create an investment.",
+        entityId: "",
+        key: "investment",
+      })
+    );
+  }
+
   if (page === "Transactions") {
     dispatch(
       openGenericModalAction({
         mode: "create",
-        key: "transaction",
         dialogTitle: "Create a transaction",
         dialogDescription: "Fill out the form below to create a transaction.",
         entityId: "",
         props: data,
+        key: "transaction",
       })
     );
   }
 };
+

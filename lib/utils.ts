@@ -7,6 +7,10 @@ import { IconType } from "react-icons/lib";
 import { FaMoneyBill, FaPiggyBank } from "react-icons/fa";
 import { TbReportAnalytics } from "react-icons/tb";
 import { AiOutlineTransaction } from "react-icons/ai";
+import { FaBtc } from "react-icons/fa";
+import { GiPayMoney } from "react-icons/gi";
+
+
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -63,6 +67,7 @@ export type TableName =
   | "budget"
   | "goal"
   | "debt"
+  | "investment"
   | "reminder";
 
 export type Page =
@@ -71,6 +76,7 @@ export type Page =
   | "Budgets"
   | "Goals"
   | "Debts"
+  | "Investments"
   | "Transactions"
   | "Reports"
   | "Settings";
@@ -104,8 +110,13 @@ export const PAGES: IPage[] = [
   },
   {
     label: "Debts",
-    icon: FaPiggyBank,
+    icon: GiPayMoney,
     link: "/debts",
+  },
+  {
+    label: "Investments",
+    icon: FaBtc,
+    link: "/investments",
   },
   {
     label: "Transactions",

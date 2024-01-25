@@ -7,6 +7,8 @@ import AccountSummaries from "./AccountSummaries";
 import BudgetStatus from "./BudgetStatus";
 import FinancialInsights from "./FinancialInsights";
 import GoalStatus from "./GoalStatus";
+import DebtStatus from "./DebtStatus";
+import InvestmentStatus from "./InvestmentStatus";
 import NotificationsAndReminders from "./NotificationAndReminders";
 import TransactionHistory from "./TransactionHistory";
 import BarChartComponent from "@/components/charts/BarChartComponent";
@@ -16,6 +18,9 @@ import { SerializedUserAccount } from "../redux/features/userAccountSlice";
 import { SerializedBudget } from "../redux/features/budgetSlice";
 import { SerializedGoal } from "../redux/features/goalSlice";
 import { SerializedReminder } from "../redux/features/remindersSlice";
+import { SerializedDebt } from "../redux/features/debtSlice";
+import { SerializedInvestment } from "../redux/features/investmentSlice";
+
 import { motion } from "framer-motion";
 
 interface IDashboardProps {
@@ -25,6 +30,8 @@ interface IDashboardProps {
   accounts: SerializedUserAccount[];
   budgets: SerializedBudget[];
   goals: SerializedGoal[];
+  debts: SerializedDebt[];
+  investments: SerializedInvestment[];
   reminders: SerializedReminder[];
 }
 
@@ -35,6 +42,8 @@ const Dashboard = ({
   accounts,
   budgets,
   goals,
+  debts,
+  investments,
   reminders,
 }: IDashboardProps) => {
   const sectionData = [
@@ -65,6 +74,26 @@ const Dashboard = ({
       data: (
         <div className="max-h-[300px] min-h-[300px] lg:max-h-[350px] lg:min-h-[350px] overflow-y-scroll scrollbar-hide">
           <GoalStatus goals={goals} />
+        </div>
+      ),
+    },
+    {
+      title: "Investments",
+      description:
+        "Check your investments here. Click on an investment card to view or edit its details or create a new one by clicking the menu button above.",
+      data: (
+        <div className="max-h-[300px] min-h-[300px] lg:max-h-[350px] lg:min-h-[350px] overflow-y-scroll scrollbar-hide">
+          <InvestmentStatus investments={investments} />
+        </div>
+      ),
+    },
+    {
+      title: "Debts",
+      description:
+        "Check your debts here. Click on a debt card to view or edit its details or create a new one by clicking the menu button above.",
+      data: (
+        <div className="max-h-[300px] min-h-[300px] lg:max-h-[350px] lg:min-h-[350px] overflow-y-scroll scrollbar-hide">
+          <DebtStatus debts={debts} />
         </div>
       ),
     },
