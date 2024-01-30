@@ -1,3 +1,5 @@
+Demo : <https://kakeibo.warded.me/>
+
 ## Installation and Running
 
 To run the app locally, follow these steps:
@@ -26,3 +28,4 @@ pnpm install
 ```sh
 pnpm run dev
 ```
+
