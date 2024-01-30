@@ -5,7 +5,7 @@ To run the app locally, follow these steps:
 1. Clone the repository:
 
 ```sh
-git clone https://github.com/nikkhvat/kana-master.git
+git clone git@github.com:fayde01/kakeibo.git
 ```
 
 2. Edit the `.env.example` to `.env` makesure to fill it
